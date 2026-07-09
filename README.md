@@ -36,8 +36,8 @@ Este repositório contém a implementação completa do sistema de controle, fus
 ## 🛠️ Como Instalar e Rodar
 
 ### Pré-requisitos
-* ROS 2 (Humble ou superior)
-* Gazebo Sim (Harmonic ou superior)
+* ROS 2 Jazzy Jalisco
+* Gazebo Sim Harmonic
 * Dependências do VRX configuradas
 
 ### Instalação
