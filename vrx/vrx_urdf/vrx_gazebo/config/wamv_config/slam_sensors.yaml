@@ -1,0 +1,21 @@
+wamv_gps:
+    - name: gps_wamv
+      x: -0.85
+      y: 0.0
+      z: 1.3
+wamv_imu:
+    - name: imu_wamv
+      x: 0.3
+      y: -0.2
+      z: 1.3
+lidar:
+    - name: lidar_wamv
+      type: 16_beam
+      x: 0.7
+      y: 0.0
+      z: 1.8
+wamv_bathymetry:
+    - name: bathymetry_wamv
+      x: 0.0
+      y: 0.0
+      z: -0.5

@@ -1,0 +1,50 @@
+# Colcon build/install/log folders
+build/
+install/
+log/
+
+# Python caches and compiled bytecode
+__pycache__/
+*.pyc
+
+# Local log files and terminal outputs
+*.log
+*log.txt
+bathymetry_log.txt
+bathymetry_syslog.txt
+debug_out.txt
+monitor_output.txt
+topics.txt
+topics_verbose.txt
+bathy_echo.txt
+test_10_runs_results.txt
+gazebo_log.txt
+sensors_log.txt
+slam_log.txt
+rviz_log.txt
+tracker_log.txt
+software_bathy.log
+mission_run.log
+
+# Maps and Graphviz exports
+*.png
+*.pdf
+*.gv
+tf_tree*
+frames*
+
+# Yaml parameter/datum dumps
+datum_dump.yaml
+params_dump.yaml
+
+# Temporary URDF/Xacro files
+/tmp/wamv_fixed.urdf.xacro
+
+# Non-essential run scripts
+run_*.sh
+!run_all.sh
+!run_sim.sh
+!run_test.sh
+
+# Scratch folder
+scratch/

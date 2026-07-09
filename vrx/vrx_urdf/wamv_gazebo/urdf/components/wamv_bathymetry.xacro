@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="wamv_bathymetry" params="name x:=0.0 y:=0.0 z:=-1.0 R:=0 P:=${pi/2} Y:=0 update_rate:=10">
+    <link name="${namespace}/${name}_link">
+      <visual name="${name}_visual">
+        <geometry>
+          <cylinder radius="0.05" length="0.1" />
+        </geometry>
+        <material name="${name}_visual_material">
+          <color rgba="0.0 0.5 1.0 1.0" />
+        </material>
+      </visual>
+      <collision name="${name}_collision">
+        <geometry>
+          <cylinder radius="0.05" length="0.1" />
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="0.0005" iyy="0.0005" izz="0.0005" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <joint name="${namespace}/${name}_joint" type="fixed">
+      <origin xyz="${x} ${y} ${z}" rpy="${R} ${P} ${Y}" />
+      <parent link="${namespace}/base_link" />
+      <child link="${namespace}/${name}_link" />
+    </joint>
+
+    <gazebo reference="${namespace}/${name}_link">
+      <sensor type="lidar" name="${name}_sensor">
+        <visualize>false</visualize>
+        <update_rate>${update_rate}</update_rate>
+        <lidar>
+          <!-- Mask to interact with seabed and obstacles -->
+          <visibility_mask>4294967295</visibility_mask>
+          <scan>
+            <horizontal>
+              <samples>3</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.01</min_angle>
+              <max_angle>0.01</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>100</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

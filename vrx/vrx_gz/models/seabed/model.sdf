@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="seabed">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <heightmap>
+            <uri>model://seabed/materials/textures/heightmap.png</uri>
+            <size>500 500 20</size>
+            <pos>0 0 -25</pos>
+          </heightmap>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <heightmap>
+            <use_terrain_paging>false</use_terrain_paging>
+            <uri>model://seabed/materials/textures/heightmap.png</uri>
+            <size>500 500 20</size>
+            <pos>0 0 -25</pos>
+          </heightmap>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.25 1</ambient>
+          <diffuse>0.2 0.3 0.25 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
