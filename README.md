@@ -41,15 +41,15 @@ Este repositório contém a implementação completa do sistema de controle, fus
 * Dependências do VRX configuradas
 
 ### Instalação
-Clone o repositório no seu workspace colcon e compile o pacote:
+Clone o repositório no seu ambiente de desenvolvimento e compile o workspace:
 ```bash
-# Navegar até a raiz do workspace
-cd /home/tales/Source/ROS/robmov
+# Navegar até a raiz do repositório clonado
+cd vrx-gazebo
 
-# Compilar o pacote
-colcon build --symlink-install --packages-select robmov_slam
+# Compilar o workspace colcon
+colcon build
 
-# Carregar o workspace
+# Carregar o ambiente do workspace
 source install/setup.bash
 ```
 

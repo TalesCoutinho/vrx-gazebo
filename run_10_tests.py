@@ -1,10 +1,19 @@
 import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
+import os
 import time
 import subprocess
 import glob
 
 NUM_RUNS = 10
-LOG_FILE = "/home/tales/Source/ROS/robmov/test_10_runs_results.txt"
+LOG_FILE = os.path.join(get_workspace_root(), \"test_10_runs_results.txt\")
 
 def modify_run_all(headless, sleep_time):
     with open("run_all.sh", "r") as f:

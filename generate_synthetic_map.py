@@ -1,3 +1,12 @@
+import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
 #!/usr/bin/env python3
 import numpy as np
 import matplotlib.pyplot as plt
@@ -77,6 +86,6 @@ plt.ylabel('Coordenada Y (metros)')
 plt.legend(loc='lower right')
 plt.grid(True, alpha=0.3)
 
-output_path = '/home/tales/Source/ROS/robmov/bathymetry_map.png'
+output_path = os.path.join(get_workspace_root(), 'bathymetry_map.png')
 plt.savefig(output_path, dpi=300, bbox_inches='tight')
 print(f'Mapa gerado com sucesso em {output_path}')

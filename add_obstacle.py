@@ -1,6 +1,15 @@
+import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
 import re
 
-file_path = '/home/tales/Source/ROS/robmov/vrx/vrx_gz/worlds/bathymetry.sdf'
+file_path = os.path.join(get_workspace_root(), 'vrx/vrx_gz/worlds/bathymetry.sdf')
 
 with open(file_path, 'r') as f:
     content = f.read()

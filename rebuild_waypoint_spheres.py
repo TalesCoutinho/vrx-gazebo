@@ -1,6 +1,15 @@
+import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
 import re
 
-with open('/home/tales/Source/ROS/robmov/vrx/vrx_gz/worlds/bathymetry.sdf', 'r') as f:
+with open(os.path.join(get_workspace_root(), 'vrx/vrx_gz/worlds/bathymetry.sdf'), 'r') as f:
     content = f.read()
 
 # Apagar as esferas antigas (wp_1 até wp_10)
@@ -48,6 +57,6 @@ for i, (name, ex, ey) in enumerate(waypoints):
 
 content = content.replace("<!-- Antenna for communication with the WAM-V -->", new_elements + "    <!-- Antenna for communication with the WAM-V -->")
 
-with open('/home/tales/Source/ROS/robmov/vrx/vrx_gz/worlds/bathymetry.sdf', 'w') as f:
+with open(os.path.join(get_workspace_root(), 'vrx/vrx_gz/worlds/bathymetry.sdf'), 'w') as f:
     f.write(content)
 

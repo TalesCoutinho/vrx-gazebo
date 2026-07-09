@@ -1,8 +1,17 @@
+import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
 import re
 
 file_paths = [
-    '/home/tales/Source/ROS/robmov/vrx/vrx_gz/worlds/bathymetry.sdf',
-    '/home/tales/Source/ROS/robmov/install/vrx_gz/share/vrx_gz/worlds/bathymetry.sdf'
+    os.path.join(get_workspace_root(), 'vrx/vrx_gz/worlds/bathymetry.sdf'),
+    os.path.join(get_workspace_root(), 'install/vrx_gz/share/vrx_gz/worlds/bathymetry.sdf')
 ]
 
 obstacle_xml = """

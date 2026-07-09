@@ -1,3 +1,12 @@
+import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
 #!/usr/bin/env python3
 
 import rclpy
@@ -48,7 +57,7 @@ class BathymetryMapper(Node):
         self.last_depth = None
         
         # Abre o arquivo de log para gravacao
-        self.log_file = open('/home/tales/Source/ROS/robmov/bathymetry_log.txt', 'w')
+        self.log_file = open(os.path.join(get_workspace_root(), 'bathymetry_log.txt'), 'w')
         # Formato: <profundidade> <incerteza_sonar> <coord_x> <coord_y> <coord_z> <incerteza_posicao>
         
         self.get_logger().info('Bathymetry Mapper Started. Logging to bathymetry_log.txt')
@@ -138,7 +147,7 @@ class BathymetryMapper(Node):
         plt.legend()
         
         # Save to file
-        output_path = '/home/tales/Source/ROS/robmov/bathymetry_map.png'
+        output_path = os.path.join(get_workspace_root(), 'bathymetry_map.png')
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
         plt.close()
         

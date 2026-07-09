@@ -1,3 +1,12 @@
+import os
+def get_workspace_root():
+    current = os.path.dirname(os.path.abspath(__file__))
+    while current != os.path.dirname(current):
+        if os.path.exists(os.path.join(current, '.git')):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.abspath(__file__))
+
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
@@ -12,7 +21,7 @@ class SoftwareBathymetry(Node):
         super().__init__('software_bathymetry')
         
         # Load heightmap image
-        self.heightmap_path = '/home/tales/Source/ROS/robmov/vrx/vrx_gz/models/seabed/materials/textures/heightmap.png'
+        self.heightmap_path = os.path.join(get_workspace_root(), 'vrx/vrx_gz/models/seabed/materials/textures/heightmap.png')
         try:
             img = Image.open(self.heightmap_path).convert('L')
             self.heightmap = np.array(img)
